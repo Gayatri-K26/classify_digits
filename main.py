@@ -18,8 +18,8 @@ train_data = datasets.MNIST(root='./data', train=True, download=True, transform=
 test_data = datasets.MNIST(root='./data', train=False, download=True, transform=transform)
 
 # Break data up, shuffle to avoid bias
-train_data = DataLoader(train_data, batch_size = 64, shuffle = True)
-test_data = DataLoader(train_data, batch_size = 64, shuffle = False)
+train_loader = DataLoader(train_data, batch_size = 64, shuffle = True)
+test_loader = DataLoader(train_data, batch_size = 64, shuffle = False)
 
 # Neural Network Time
 class SimpleNN(nn.Module):
@@ -34,8 +34,8 @@ class SimpleNN(nn.Module):
             nn.Linear(64, 10) # 64 -> 10 (for digits 0-9)
         )
 
-        def forward(self, x):
-            return self.model(x)
+    def forward(self, x):
+        return self.model(x)
         
 # Training Tools
 model = SimpleNN().to(device) # brain in training
